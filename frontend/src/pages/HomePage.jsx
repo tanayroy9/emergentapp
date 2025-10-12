@@ -3,7 +3,6 @@ import axios from 'axios';
 import Player from '../components/Player';
 import RightSidebar from '../components/RightSidebar';
 import ScheduleGrid from '../components/ScheduleGrid';
-import Ticker from '../components/Ticker';
 import Header from '../components/Header';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
