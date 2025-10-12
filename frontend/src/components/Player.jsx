@@ -49,9 +49,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
         
         {/* Logo Overlay - Top Right */}
         <div className="absolute top-4 right-4 z-50" data-testid="logo-overlay">
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-500 rounded-lg px-4 py-2 border-2 border-white shadow-lg">
-            <span className="text-white font-bold text-xl tracking-wider">NZURI TV</span>
-          </div>
+          <img src="/nzuri-logo.svg" alt="Nzuri TV" className="w-32 h-16 drop-shadow-2xl" />
         </div>
 
         {/* Breaking News Ticker Overlay - Inside Player */}
