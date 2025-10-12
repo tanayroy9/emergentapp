@@ -1,0 +1,110 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { CloudRain, Sun, Cloud } from 'lucide-react';
+
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const API = `${BACKEND_URL}/api`;
+
+export default function RightSidebar() {
+  const [ads, setAds] = useState([]);
+
+  useEffect(() => {
+    loadAds();
+  }, []);
+
+  const loadAds = async () => {
+    try {
+      const response = await axios.get(`${API}/ads`);
+      setAds(response.data);
+    } catch (error) {
+      console.error('Error loading ads:', error);
+    }
+  };
+
+  return (
+    <aside className="w-full lg:w-1/3 space-y-6" data-testid="right-sidebar">
+      {/* Weather Widget */}
+      <div className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-sm rounded-xl p-5 border border-cyan-500/30" data-testid="weather-widget">
+        <h2 className="font-semibold text-lg mb-3 text-white flex items-center gap-2">
+          <Sun className="text-cyan-400" size={20} />
+          Weather
+        </h2>
+        <div className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-3xl font-bold text-white">24°C</p>
+              <p className="text-sm text-gray-400">Johannesburg</p>
+            </div>
+            <Cloud className="text-cyan-400" size={48} />
+          </div>
+          <div className="grid grid-cols-3 gap-2 pt-3 border-t border-gray-700">
+            <div className="text-center">
+              <Sun className="mx-auto mb-1 text-yellow-400" size={20} />
+              <p className="text-xs text-gray-400">Mon</p>
+              <p className="text-sm font-semibold text-white">26°</p>
+            </div>
+            <div className="text-center">
+              <Cloud className="mx-auto mb-1 text-gray-400" size={20} />
+              <p className="text-xs text-gray-400">Tue</p>
+              <p className="text-sm font-semibold text-white">23°</p>
+            </div>
+            <div className="text-center">
+              <CloudRain className="mx-auto mb-1 text-blue-400" size={20} />
+              <p className="text-xs text-gray-400">Wed</p>
+              <p className="text-sm font-semibold text-white">20°</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sponsored Ads */}
+      <div className="space-y-4">
+        <h2 className="font-semibold text-lg text-white" data-testid="sponsored-heading">Sponsored</h2>
+        
+        {ads.length > 0 ? (
+          ads.map((ad) => (
+            <a
+              key={ad.id}
+              href={ad.click_url || '#'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-gray-800/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-cyan-500/50 card-hover"
+              data-testid={`ad-${ad.id}`}
+            >
+              <img 
+                src={ad.image_url} 
+                alt={ad.title} 
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-3">
+                <p className="text-sm font-medium text-white">{ad.title}</p>
+              </div>
+            </a>
+          ))
+        ) : (
+          <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-xl p-8 border border-gray-700 text-center">
+            <div className="text-4xl mb-3">📢</div>
+            <p className="text-gray-400 text-sm">Your ad could be here</p>
+            <p className="text-gray-500 text-xs mt-1">Contact us for advertising</p>
+          </div>
+        )}
+      </div>
+
+      {/* Quick Links */}
+      <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-5 border border-gray-700">
+        <h3 className="font-semibold text-white mb-3">Categories</h3>
+        <div className="space-y-2">
+          {['Economy', 'Sports', 'Mining', 'Green Energy', 'Music', 'Entertainment'].map((category) => (
+            <button
+              key={category}
+              className="w-full text-left px-3 py-2 rounded-lg text-sm text-gray-300 hover:bg-cyan-500/10 hover:text-cyan-400 transition-colors"
+              data-testid={`category-${category.toLowerCase()}`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+      </div>
+    </aside>
+  );
+}
