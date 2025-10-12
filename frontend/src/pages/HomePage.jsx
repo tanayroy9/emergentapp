@@ -130,9 +130,6 @@ export default function HomePage() {
           {channel && <ScheduleGrid channelId={channel.id} />}
         </section>
       </main>
-
-      {/* Lower-third Ticker */}
-      <Ticker />
     </div>
   );
 }
