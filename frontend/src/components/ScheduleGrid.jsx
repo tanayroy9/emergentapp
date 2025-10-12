@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { format, startOfWeek, addDays, isSameDay, parseISO } from 'date-fns';
+import { format, addDays, isSameDay, parseISO } from 'date-fns';
 import { Calendar, Clock } from 'lucide-react';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -10,7 +10,7 @@ export default function ScheduleGrid({ channelId }) {
   const [scheduleItems, setScheduleItems] = useState([]);
   const [programs, setPrograms] = useState({});
   const [loading, setLoading] = useState(true);
-  const [currentWeekStart, setCurrentWeekStart] = useState(startOfWeek(new Date(), { weekStartsOn: 1 }));
+  const [currentWeekStart, setCurrentWeekStart] = useState(new Date()); // Start from today
 
   useEffect(() => {
     loadSchedule();
