@@ -33,7 +33,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
           <iframe
             src={embedUrl}
             title="Nzuri TV Live"
-            allow="autoplay; encrypted-media; fullscreen"
+            allow="autoplay; encrypted-media; fullscreen; accelerometer; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full"
             data-testid="video-iframe"
