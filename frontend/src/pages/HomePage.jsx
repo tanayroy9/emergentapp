@@ -20,7 +20,7 @@ export default function HomePage() {
   useEffect(() => {
     if (channel) {
       loadNowPlaying();
-      const interval = setInterval(loadNowPlaying, 10000); // Poll every 10 seconds
+      const interval = setInterval(loadNowPlaying, 10000);
       return () => clearInterval(interval);
     }
   }, [channel]);
@@ -89,32 +89,32 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Highlights Section */}
+            {/* November Highlights Section */}
             <div className="mt-6">
-              <h2 className="text-2xl font-bold mb-4 text-white" data-testid="highlights-heading">Today's Highlights</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                  { title: 'Economic Growth Report', category: 'Economy', icon: '📊' },
-                  { title: 'Green Energy Summit 2025', category: 'Energy', icon: '🌱' },
-                  { title: 'Mining Sector Updates', category: 'Mining', icon: '⛏️' },
-                  { title: 'Music Festival Preview', category: 'Entertainment', icon: '🎵' }
-                ].map((highlight, idx) => (
-                  <div 
-                    key={idx} 
-                    className="bg-gray-800/60 backdrop-blur-sm rounded-lg p-4 border border-gray-700 hover:border-cyan-500/50 card-hover cursor-pointer"
-                    data-testid={`highlight-${idx}`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className="w-12 h-12 bg-cyan-500/10 rounded-lg flex items-center justify-center text-2xl">
-                        {highlight.icon}
-                      </div>
-                      <div className="flex-1">
-                        <span className="text-xs font-medium text-cyan-400 uppercase tracking-wider">{highlight.category}</span>
-                        <h3 className="text-base font-semibold text-white mt-1">{highlight.title}</h3>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <h2 className="text-2xl font-bold mb-4 text-white" data-testid="highlights-heading">November Highlights</h2>
+              
+              {/* Movie Posters */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hux5n7sj_1a.png" 
+                  alt="Mining Talk" 
+                  className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hcyp4vat_1b.png" 
+                  alt="Youth in Sports" 
+                  className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hfv4l82b_1c.png" 
+                  alt="Mangwanani Africa" 
+                  className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
+                <img 
+                  src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/zpooxxlu_1d.png" 
+                  alt="Moyo Africa" 
+                  className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                />
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function HomePage() {
         {/* Weekly Schedule Section */}
         <section className="mt-8 bg-gray-800/40 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/20" data-testid="schedule-section">
           <h2 className="text-2xl font-bold mb-4 text-white">Weekly Schedule</h2>
-          {channel && <ScheduleGrid channelId={channel.id} />}
+          {channel && <ScheduleGrid channelId={channel.id} nowPlaying={nowPlaying} />}
         </section>
       </main>
     </div>

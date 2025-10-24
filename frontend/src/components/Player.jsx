@@ -5,26 +5,38 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 export default function Player({ embedUrl, logoUrl, nowPlaying }) {
-  const [tickers, setTickers] = useState([]);
+  const [newsItems, setNewsItems] = useState([]);
 
   useEffect(() => {
-    loadTickers();
-    const interval = setInterval(loadTickers, 30000);
+    loadMiningNews();
+    const interval = setInterval(loadMiningNews, 300000); // Refresh every 5 minutes
     return () => clearInterval(interval);
   }, []);
 
-  const loadTickers = async () => {
+  const loadMiningNews = async () => {
+    try {
+      // Fetch mining news from RSS feed
+      const response = await axios.get(`${API}/mining-news`);
+      setNewsItems(response.data);
+    } catch (error) {
+      console.error('Error loading mining news:', error);
+      // Fallback to static ticker items
+      loadStaticTickers();
+    }
+  };
+
+  const loadStaticTickers = async () => {
     try {
       const response = await axios.get(`${API}/ticker`);
-      setTickers(response.data);
+      setNewsItems(response.data.map(t => ({ text: t.text })));
     } catch (error) {
       console.error('Error loading tickers:', error);
     }
   };
 
-  const tickerText = tickers.length > 0 
-    ? tickers.map(t => t.text).join(' • ')
-    : 'Welcome to Nzuri TV - Your source for local and international news';
+  const tickerText = newsItems.length > 0 
+    ? newsItems.map(item => item.text || item.title).join(' • ')
+    : 'Welcome to Nzuri TV - Zimbabwe\'s leading source for mining and business news';
 
   return (
     <div className="relative w-full" data-testid="player-container">
@@ -49,7 +61,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
         
         {/* Logo Overlay - Top Right */}
         <div className="absolute top-4 right-4 z-50" data-testid="logo-overlay">
-          <img src="/nzuri-logo.svg" alt="Nzuri TV" className="w-32 h-16 drop-shadow-2xl" />
+          <img src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/0w4oq3kd_Nzurilogo.png" alt="Nzuri TV" className="h-16 drop-shadow-2xl" />
         </div>
 
         {/* Breaking News Ticker Overlay - Inside Player */}
