@@ -7,7 +7,7 @@ export default function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
-            <img src="/nzuri-logo.svg" alt="Nzuri TV" className="h-12" />
+            <img src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/0w4oq3kd_Nzurilogo.png" alt="Nzuri TV" className="h-14" />
             <div>
               <h1 className="text-2xl font-bold text-white tracking-tight">Nzuri TV</h1>
               <p className="text-xs text-cyan-400 -mt-1">News & Entertainment</p>
