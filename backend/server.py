@@ -487,6 +487,50 @@ async def get_ads(active_only: bool = True):
             ad['created_at'] = datetime.fromisoformat(ad['created_at'])
     return ads
 
+# ============ MINING NEWS RSS FEED ============
+
+@api_router.get("/mining-news")
+async def get_mining_news():
+    """Fetch mining news from Zimbabwe sources"""
+    import feedparser
+    
+    news_items = []
+    
+    # Zimbabwe mining news sources
+    feeds = [
+        "https://www.mining.com/feed/",
+        "https://www.miningweekly.com/rss-feeds/sections/africa",
+    ]
+    
+    try:
+        for feed_url in feeds:
+            try:
+                feed = feedparser.parse(feed_url)
+                for entry in feed.entries[:5]:  # Get 5 latest from each
+                    news_items.append({
+                        "title": entry.get('title', 'Mining News Update'),
+                        "text": entry.get('title', 'Mining News Update'),
+                        "link": entry.get('link', ''),
+                        "published": entry.get('published', '')
+                    })
+            except Exception as e:
+                logger.error(f"Error parsing feed {feed_url}: {e}")
+                
+        # If no news fetched, use fallback
+        if not news_items:
+            news_items = [
+                {"text": "Zimbabwe mining sector reports steady growth in Q4", "title": "Mining Update"},
+                {"text": "Gold production reaches new milestone", "title": "Gold News"},
+                {"text": "Green energy initiatives boost mining efficiency", "title": "Energy Update"},
+                {"text": "New mining investments announced for 2025", "title": "Investment News"}
+            ]
+            
+        return news_items[:15]  # Return max 15 items
+        
+    except Exception as e:
+        logger.error(f"Error fetching mining news: {e}")
+        return [{"text": "Mining news updates coming soon", "title": "Update"}]
+
 # ============ SCHEDULER ENGINE ============
 
 async def scheduler_engine():
