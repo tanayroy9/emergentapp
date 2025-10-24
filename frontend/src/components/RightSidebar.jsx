@@ -5,9 +5,15 @@ import { CloudRain, Sun, Cloud, Clock } from 'lucide-react';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
+const ROTATING_ADS = [
+  'https://customer-assets.emergentagent.com/job_nzuritv/artifacts/xsxoel0w_bbb.png',
+  'https://customer-assets.emergentagent.com/job_nzuritv/artifacts/0lgfobns_ccc.png'
+];
+
 export default function RightSidebar() {
   const [ads, setAds] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentAdIndex, setCurrentAdIndex] = useState(0);
 
   useEffect(() => {
     loadAds();
@@ -17,7 +23,15 @@ export default function RightSidebar() {
       setCurrentTime(new Date());
     }, 1000);
     
-    return () => clearInterval(clockInterval);
+    // Rotate ads every 4 seconds
+    const adInterval = setInterval(() => {
+      setCurrentAdIndex((prevIndex) => (prevIndex + 1) % ROTATING_ADS.length);
+    }, 4000);
+    
+    return () => {
+      clearInterval(clockInterval);
+      clearInterval(adInterval);
+    };
   }, []);
 
   const loadAds = async () => {
@@ -29,7 +43,6 @@ export default function RightSidebar() {
     }
   };
 
-  // Format time for Zimbabwe (CAT - Central Africa Time, UTC+2)
   const getZimbabweTime = () => {
     const options = {
       timeZone: 'Africa/Harare',
@@ -103,42 +116,31 @@ export default function RightSidebar() {
         </div>
       </div>
 
-      {/* Sponsored Ads */}
+      {/* Rotating Sponsored Ads */}
       <div className="space-y-4">
         <h2 className="font-semibold text-lg text-white" data-testid="sponsored-heading">Sponsored</h2>
         
-        {ads.length > 0 ? (
-          ads.map((ad) => (
-            <a
-              key={ad.id}
-              href={ad.click_url || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block bg-gray-800/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 hover:border-cyan-500/50 card-hover"
-              data-testid={`ad-${ad.id}`}
+        <div className="relative bg-gray-800/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 h-64">
+          {ROTATING_ADS.map((adUrl, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentAdIndex ? 'opacity-100' : 'opacity-0'
+              }`}
             >
               <img 
-                src={ad.image_url} 
-                alt={ad.title} 
-                className="w-full h-48 object-cover"
+                src={adUrl} 
+                alt={`Advertisement ${index + 1}`} 
+                className="w-full h-full object-cover"
               />
-              <div className="p-3">
-                <p className="text-sm font-medium text-white">{ad.title}</p>
-              </div>
-            </a>
-          ))
-        ) : (
-          <div className="bg-gradient-to-br from-gray-800/60 to-gray-900/60 backdrop-blur-sm rounded-xl p-8 border border-gray-700 text-center">
-            <div className="text-4xl mb-3">📢</div>
-            <p className="text-gray-400 text-sm">Your ad could be here</p>
-            <p className="text-gray-500 text-xs mt-1">Contact us for advertising</p>
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Quick Links */}
+      {/* Exclusive Content On Demand */}
       <div className="bg-gray-800/40 backdrop-blur-sm rounded-xl p-5 border border-gray-700">
-        <h3 className="font-semibold text-white mb-3">Categories</h3>
+        <h3 className="font-semibold text-white mb-3">Exclusive Content On Demand</h3>
         <div className="space-y-2">
           {['Economy', 'Sports', 'Mining', 'Green Energy', 'Music', 'Entertainment'].map((category) => (
             <button

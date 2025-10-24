@@ -15,12 +15,10 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
 
   const loadMiningNews = async () => {
     try {
-      // Fetch mining news from RSS feed
       const response = await axios.get(`${API}/mining-news`);
       setNewsItems(response.data);
     } catch (error) {
       console.error('Error loading mining news:', error);
-      // Fallback to static ticker items
       loadStaticTickers();
     }
   };
@@ -36,7 +34,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
 
   const tickerText = newsItems.length > 0 
     ? newsItems.map(item => item.text || item.title).join(' • ')
-    : 'Welcome to Nzuri TV - Zimbabwe\'s leading source for mining and business news';
+    : 'Welcome to Nzuri Digital TV - Zimbabwe\'s leading source for mining and business news';
 
   return (
     <div className="relative w-full" data-testid="player-container">
@@ -44,7 +42,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
         {embedUrl ? (
           <iframe
             src={embedUrl}
-            title="Nzuri TV Live"
+            title="Nzuri Digital TV Live"
             allow="autoplay; encrypted-media; fullscreen; accelerometer; gyroscope; picture-in-picture"
             allowFullScreen
             className="w-full h-full"
@@ -61,14 +59,14 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
         
         {/* Logo Overlay - Top Right */}
         <div className="absolute top-4 right-4 z-50" data-testid="logo-overlay">
-          <img src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/0w4oq3kd_Nzurilogo.png" alt="Nzuri TV" className="h-16 drop-shadow-2xl" />
+          <img src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/2czn4c6r_aaa.png" alt="Nzuri Digital TV" className="h-16 drop-shadow-2xl" />
         </div>
 
         {/* Breaking News Ticker Overlay - Inside Player */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-red-600 via-red-700 to-red-600 py-2 z-40" data-testid="player-ticker">
           <div className="flex items-center">
             <div className="bg-white text-red-600 font-bold px-4 py-1 text-xs uppercase tracking-wider flex-shrink-0">
-              Breaking
+              Nzuri DTV Breaking News
             </div>
             <div className="flex-1 overflow-hidden ml-3">
               <div className="animate-marquee text-white font-medium text-sm whitespace-nowrap">
