@@ -9,7 +9,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
 
   useEffect(() => {
     loadMiningNews();
-    const interval = setInterval(loadMiningNews, 300000); // Refresh every 5 minutes
+    const interval = setInterval(loadMiningNews, 300000);
     return () => clearInterval(interval);
   }, []);
 
@@ -43,7 +43,7 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
           <iframe
             src={embedUrl}
             title="Nzuri Digital TV Live"
-            allow="autoplay; encrypted-media; fullscreen; accelerometer; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
             className="w-full h-full"
             data-testid="video-iframe"
@@ -56,17 +56,12 @@ export default function Player({ embedUrl, logoUrl, nowPlaying }) {
             </div>
           </div>
         )}
-        
-        {/* Logo Overlay - Top Right */}
-        <div className="absolute top-4 right-4 z-50" data-testid="logo-overlay">
-          <img src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/2czn4c6r_aaa.png" alt="Nzuri Digital TV" className="h-16 drop-shadow-2xl" />
-        </div>
 
         {/* Breaking News Ticker Overlay - Inside Player */}
         <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-r from-red-600 via-red-700 to-red-600 py-2 z-40" data-testid="player-ticker">
           <div className="flex items-center">
             <div className="bg-white text-red-600 font-bold px-4 py-1 text-xs uppercase tracking-wider flex-shrink-0">
-              Nzuri DTV Breaking News
+              Breaking News
             </div>
             <div className="flex-1 overflow-hidden ml-3">
               <div className="animate-marquee text-white font-medium text-sm whitespace-nowrap">

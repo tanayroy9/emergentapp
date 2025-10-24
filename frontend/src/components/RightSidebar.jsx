@@ -5,32 +5,19 @@ import { CloudRain, Sun, Cloud, Clock } from 'lucide-react';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-const ROTATING_ADS = [
-  'https://customer-assets.emergentagent.com/job_nzuritv/artifacts/xsxoel0w_bbb.png',
-  'https://customer-assets.emergentagent.com/job_nzuritv/artifacts/0lgfobns_ccc.png'
-];
-
 export default function RightSidebar() {
   const [ads, setAds] = useState([]);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [currentAdIndex, setCurrentAdIndex] = useState(0);
 
   useEffect(() => {
     loadAds();
     
-    // Update clock every second
     const clockInterval = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
     
-    // Rotate ads every 4 seconds
-    const adInterval = setInterval(() => {
-      setCurrentAdIndex((prevIndex) => (prevIndex + 1) % ROTATING_ADS.length);
-    }, 4000);
-    
     return () => {
       clearInterval(clockInterval);
-      clearInterval(adInterval);
     };
   }, []);
 
@@ -113,28 +100,6 @@ export default function RightSidebar() {
           </div>
           <p className="text-sm text-gray-400">{getZimbabweDate()}</p>
           <p className="text-xs text-cyan-400 mt-2">Harare, Zimbabwe (CAT)</p>
-        </div>
-      </div>
-
-      {/* Rotating Sponsored Ads */}
-      <div className="space-y-4">
-        <h2 className="font-semibold text-lg text-white" data-testid="sponsored-heading">Sponsored</h2>
-        
-        <div className="relative bg-gray-800/60 backdrop-blur-sm rounded-xl overflow-hidden border border-gray-700 h-64">
-          {ROTATING_ADS.map((adUrl, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentAdIndex ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <img 
-                src={adUrl} 
-                alt={`Advertisement ${index + 1}`} 
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
         </div>
       </div>
 
