@@ -101,21 +101,25 @@ export default function HomePage() {
                   src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hux5n7sj_1a.png" 
                   alt="Mining Talk" 
                   className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                  onError={(e) => e.target.style.display = 'none'}
                 />
                 <img 
                   src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hcyp4vat_1b.png" 
                   alt="Youth in Sports" 
                   className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                  onError={(e) => e.target.style.display = 'none'}
                 />
                 <img 
                   src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/hfv4l82b_1c.png" 
                   alt="Mangwanani Africa" 
                   className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                  onError={(e) => e.target.style.display = 'none'}
                 />
                 <img 
                   src="https://customer-assets.emergentagent.com/job_nzuritv/artifacts/zpooxxlu_1d.png" 
                   alt="Moyo Africa" 
                   className="w-full rounded-lg shadow-lg hover:scale-105 transition-transform cursor-pointer"
+                  onError={(e) => e.target.style.display = 'none'}
                 />
               </div>
             </div>
