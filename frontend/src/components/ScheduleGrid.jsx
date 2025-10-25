@@ -58,8 +58,12 @@ export default function ScheduleGrid({ channelId, nowPlaying }) {
 
   const getScheduleForDay = (day) => {
     return scheduleItems.filter(item => {
-      const itemDate = parseISO(item.start_time);
-      return isSameDay(itemDate, day);
+      try {
+        const itemDate = parseISO(item.start_time);
+        return isSameDay(itemDate, day);
+      } catch (e) {
+        return false;
+      }
     }).sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
   };
 
