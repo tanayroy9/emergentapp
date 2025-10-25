@@ -21,10 +21,12 @@ export default function ScheduleGrid({ channelId, nowPlaying }) {
   }, [channelId]);
 
   const loadSchedule = async () => {
+    if (!channelId) return;
+    
     try {
       setLoading(true);
       const response = await axios.get(`${API}/schedule?channel_id=${channelId}`);
-      const items = response.data;
+      const items = response.data || [];
       
       const programIds = [...new Set(items.map(item => item.program_id))];
       const programPromises = programIds.map(id => 
