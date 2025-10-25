@@ -14,8 +14,11 @@ export default function ScheduleGrid({ channelId, nowPlaying }) {
   const [expandedDays, setExpandedDays] = useState({});
 
   useEffect(() => {
-    loadSchedule();
-  }, [channelId, currentWeekStart]);
+    if (channelId) {
+      loadSchedule();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [channelId]);
 
   const loadSchedule = async () => {
     try {
