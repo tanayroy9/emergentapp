@@ -164,7 +164,7 @@ export default function AdminScheduler() {
   };
 
   const handleDeleteSchedule = async (scheduleId) => {
-    if (!confirm('Are you sure you want to delete this schedule item?')) return;
+    if (!window.confirm('Are you sure you want to delete this schedule item?')) return;
     
     try {
       await axios.delete(`${API}/schedule/${scheduleId}`);
