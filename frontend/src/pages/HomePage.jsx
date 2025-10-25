@@ -15,6 +15,7 @@ export default function HomePage() {
 
   useEffect(() => {
     loadChannel();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function HomePage() {
       const interval = setInterval(loadNowPlaying, 10000);
       return () => clearInterval(interval);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [channel]);
 
   const loadChannel = async () => {
