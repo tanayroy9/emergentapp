@@ -7,73 +7,61 @@ const SuccessPage = () => {
       year: '2024',
       title: 'F.C Barcelona Legends vs Ghana Legends',
       location: 'Ghana',
-      image: 'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2023',
       title: 'F.C Barcelona Legends vs DRC Legends',
       location: 'Democratic Republic of Congo',
-      image: 'https://images.unsplash.com/photo-1610441572339-bdf395d1c410?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2023',
       title: 'Africa Legends vs Zambia Legends',
       location: 'Zambia',
-      image: 'https://images.unsplash.com/photo-1610441553250-2c124a2de988?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2023',
       title: 'F.C Barcelona Legends vs Zambia Legends',
       location: 'Zambia',
-      image: 'https://images.unsplash.com/photo-1751394211293-66bebbbd7149?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2019',
       title: 'Sevilla F.C vs Simba F.C',
       location: 'Tanzania',
-      image: 'https://images.unsplash.com/photo-1761039808597-5639866bab8a?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2018',
       title: 'Nelson Mandela Centenary - F.C Barcelona vs Mamelodi Sundowns',
       location: 'South Africa',
-      image: 'https://images.unsplash.com/photo-1761039808115-77b271985e47?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2018',
       title: 'F.C Barcelona Legends Botswana State House Visit & Youth Program',
       location: 'Botswana',
-      image: 'https://images.unsplash.com/photo-1706736828642-17dec58ed7e7?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2017',
       title: 'F.C Barcelona Legends vs Mozambique Mambas',
       location: 'Mozambique',
-      image: 'https://images.pexels.com/photos/12742524/pexels-photo-12742524.jpeg?w=800',
     },
     {
       year: '2017',
       title: 'F.C Barcelona Legends vs Zimbabwe',
       location: 'Zimbabwe',
-      image: 'https://images.pexels.com/photos/34515976/pexels-photo-34515976.jpeg?w=800',
     },
     {
       year: '2017',
       title: 'Neymar Jr Livingstone Visit',
       location: 'Zambia',
-      image: 'https://images.unsplash.com/photo-1553778263-73a83bab9b0c?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2015',
       title: 'F.C Barcelona Legends vs Tanzania Legends',
       location: 'Tanzania',
-      image: 'https://images.unsplash.com/photo-1610441572339-bdf395d1c410?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
     {
       year: '2015',
       title: 'Real Madrid Legends vs Tanzania Legends',
       location: 'Tanzania',
-      image: 'https://images.unsplash.com/photo-1610441553250-2c124a2de988?crop=entropy&cs=srgb&fm=jpg&q=85&w=800',
     },
   ];
 
@@ -153,26 +141,42 @@ const SuccessPage = () => {
             </h2>
             <p className="text-xl text-silver">Bringing global football excellence to Africa</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {events.map((event, index) => (
-              <div key={index} className="glass-card group" data-testid={`event-card-${index}`}>
-                <div className="relative overflow-hidden rounded-lg mb-4">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 left-4 bg-gold text-black px-3 py-1 rounded-full font-bold text-sm">
-                    {event.year}
+          
+          {/* Timeline Container */}
+          <div className="max-w-5xl mx-auto">
+            <div className="relative">
+              {/* Vertical Line */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-gold via-gold/50 to-gold" />
+              
+              {/* Timeline Events */}
+              <div className="space-y-12">
+                {events.map((event, index) => (
+                  <div key={index} className="relative" data-testid={`event-timeline-${index}`}>
+                    {/* Year Badge on Timeline */}
+                    <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-6">
+                      <div className="bg-gold text-black font-bold text-xl px-6 py-3 rounded-full shadow-lg border-4 border-black z-10">
+                        {event.year}
+                      </div>
+                    </div>
+                    
+                    {/* Event Details - Alternating Left/Right */}
+                    <div className={`flex items-start ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}>
+                      <div className={`w-full md:w-5/12 ${index % 2 === 0 ? 'md:pr-12 text-right' : 'md:pl-12 text-left'}`}>
+                        <div className="glass-card mt-12">
+                          <h3 className="text-lg md:text-xl font-bold text-gold mb-2">{event.title}</h3>
+                          <div className={`flex items-center gap-2 text-silver text-sm ${
+                            index % 2 === 0 ? 'justify-end' : 'justify-start'
+                          }`}>
+                            <MapPin size={16} />
+                            <span>{event.location}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <h3 className="text-lg font-bold text-gold mb-2">{event.title}</h3>
-                <div className="flex items-center text-silver text-sm">
-                  <MapPin size={16} className="mr-2" />
-                  {event.location}
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
@@ -224,7 +228,7 @@ const SuccessPage = () => {
         </div>
       </section>
 
-      {/* Testimonials (Placeholder) */}
+      {/* Testimonials */}
       <section className="py-20 bg-gradient-to-b from-gray-900 to-black" data-testid="testimonials-section">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
