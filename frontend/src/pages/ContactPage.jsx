@@ -217,26 +217,43 @@ const ContactPage = () => {
       {/* Map/Additional Info */}
       <section className="py-20 bg-gradient-to-b from-black to-gray-900" data-testid="additional-info">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Visit Our <span className="text-gold">Office</span>
-            </h2>
-            <p className="text-xl text-silver mb-8">
-              Located in the heart of Sandton, Johannesburg, we welcome visitors by appointment.
-              Contact us to schedule a meeting.
-            </p>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Visit Our <span className="text-gold">Office</span>
+              </h2>
+              <p className="text-xl text-silver mb-4">
+                Located in the heart of Sandton, Johannesburg, we welcome visitors by appointment.
+                Contact us to schedule a meeting.
+              </p>
+            </div>
             <div className="glass-card">
-              <div className="aspect-video bg-black/50 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="w-16 h-16 mx-auto mb-4 text-gold" />
-                  <p className="text-silver">
-                    13 Amalinda Street, Sandown-Estate
-                    <br />
-                    Sandton, Johannesburg
-                    <br />
-                    South Africa
-                  </p>
+              {/* Google Maps Embed */}
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <iframe
+                  title="SAI Sports Office Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3583.0234671234567!2d28.0547!3d-26.1076!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDA2JzI3LjQiUyAyOMKwMDMnMTYuOSJF!5e0!3m2!1sen!2sza!4v1234567890!5m2!1sen!2sza&q=13+Amalinda+Street,+Sandown+Estate,+Sandton,+Johannesburg,+South+Africa"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  data-testid="google-maps-iframe"
+                />
+              </div>
+              <div className="mt-6 text-center">
+                <div className="flex items-center justify-center gap-2 text-gold mb-2">
+                  <MapPin className="w-5 h-5" />
+                  <span className="font-semibold">Our Address</span>
                 </div>
+                <p className="text-silver">
+                  13 Amalinda Street, Sandown-Estate
+                  <br />
+                  Sandton, Johannesburg
+                  <br />
+                  South Africa
+                </p>
               </div>
             </div>
           </div>
