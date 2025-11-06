@@ -177,14 +177,14 @@ const AboutPage = () => {
               </h3>
               <p className="text-xl text-silver">Meet the directors driving SAI Sports forward</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               {/* Director 1 */}
-              <div className="glass-card text-center" data-testid="director-1">
-                <div className="mb-6">
+              <div className="glass-card text-center flex flex-col items-center" data-testid="director-1">
+                <div className="mb-6 flex items-center justify-center">
                   <img
                     src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/44dhtktz_4.png"
                     alt="Youshen Naidoo"
-                    className="w-48 h-48 object-cover rounded-full mx-auto border-4 border-gold/30"
+                    className="w-48 h-48 object-cover rounded-full border-4 border-gold/30"
                   />
                 </div>
                 <h4 className="text-2xl font-bold text-gold mb-2">Youshen Naidoo</h4>
@@ -204,12 +204,12 @@ const AboutPage = () => {
               </div>
 
               {/* Director 2 */}
-              <div className="glass-card text-center" data-testid="director-2">
-                <div className="mb-6">
+              <div className="glass-card text-center flex flex-col items-center" data-testid="director-2">
+                <div className="mb-6 flex items-center justify-center">
                   <img
                     src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/foq0nybo_5.png"
                     alt="Tichaona Mawoni"
-                    className="w-48 h-48 object-cover rounded-full mx-auto border-4 border-gold/30"
+                    className="w-48 h-48 object-cover rounded-full border-4 border-gold/30"
                   />
                 </div>
                 <h4 className="text-2xl font-bold text-gold mb-2">Tichaona Mawoni</h4>
