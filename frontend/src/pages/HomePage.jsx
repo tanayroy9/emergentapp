@@ -16,14 +16,14 @@ const HomePage = () => {
     {
       title: 'Building Champions On and Off the Field',
       subtitle: '16+ Years of Excellence in Sports Management',
-      image: 'https://images.unsplash.com/photo-1610441572339-bdf395d1c410?crop=entropy&cs=srgb&fm=jpg&q=85&w=1920',
+      image: 'https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/bs53lz5l_2.png',
       cta: 'Our Services',
       link: '/services',
     },
     {
       title: 'Empowering African Athletes',
       subtitle: 'Connecting Talent with World-Class Opportunities',
-      image: 'https://images.unsplash.com/photo-1610441553250-2c124a2de988?crop=entropy&cs=srgb&fm=jpg&q=85&w=1920',
+      image: 'https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/kc0yuwap_3.png',
       cta: 'Success Stories',
       link: '/success',
     },
@@ -52,7 +52,7 @@ const HomePage = () => {
   };
 
   const stats = [
-    { icon: Trophy, value: '434+', label: 'Finished Projects' },
+    { icon: Trophy, value: '134+', label: 'Finished Projects' },
     { icon: TrendingUp, value: '16+', label: 'Years in Business' },
     { icon: Users, value: '178+', label: 'Staff & Freelancers' },
     { icon: Globe, value: '257+', label: 'Happy Clients' },
@@ -110,7 +110,7 @@ const HomePage = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
             </div>
             <div className="relative h-full container mx-auto px-4 flex items-center">
-              <div className="max-w-2xl animated-bg">
+              <div className="max-w-2xl">
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white leading-tight">
                   {banner.title}
                 </h1>

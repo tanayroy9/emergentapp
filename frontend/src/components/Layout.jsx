@@ -20,7 +20,7 @@ const Layout = ({ children }) => {
   return (
     <div className="min-h-screen">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-gold/20">
+      <header className="fixed top-0 left-0 right-0 z-50 modern-nav-gradient backdrop-blur-md border-b border-gold/30">
         <div className="container mx-auto px-4">
           {/* Top Bar */}
           <div className="hidden md:flex items-center justify-between py-2 border-b border-gold/10">
@@ -43,10 +43,11 @@ const Layout = ({ children }) => {
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-3" data-testid="logo-link">
-              <div className="text-2xl md:text-3xl font-bold">
-                <span className="text-gold">SAI</span>
-                <span className="text-silver"> SPORTS</span>
-              </div>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/osi8hfrr_1.png" 
+                alt="SAI Sports" 
+                className="h-12 md:h-16 w-auto object-contain"
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -92,7 +93,7 @@ const Layout = ({ children }) => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-black border-t border-gold/20" data-testid="mobile-menu">
+          <div className="lg:hidden bg-black/95 border-t border-gold/20" data-testid="mobile-menu">
             <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navItems.map((item) => (
                 <Link
@@ -129,10 +130,11 @@ const Layout = ({ children }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {/* Company Info */}
             <div>
-              <h3 className="text-2xl font-bold mb-4">
-                <span className="text-gold">SAI</span>
-                <span className="text-silver"> SPORTS</span>
-              </h3>
+              <img 
+                src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/osi8hfrr_1.png" 
+                alt="SAI Sports" 
+                className="h-12 w-auto object-contain mb-4"
+              />
               <p className="text-silver text-sm mb-4">
                 Positioning Africa at the Heart of Global Sports Excellence
               </p>
