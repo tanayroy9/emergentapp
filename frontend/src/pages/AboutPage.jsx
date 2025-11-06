@@ -140,14 +140,14 @@ const AboutPage = () => {
       {/* Experience */}
       <section className="py-20 bg-gradient-to-b from-black to-gray-900" data-testid="experience-section">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-8">
               <span className="text-gold">16+ Years</span> of Excellence
             </h2>
-            <div className="glass-card">
+            <div className="glass-card mb-12">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-gold mb-2">434+</div>
+                  <div className="text-4xl font-bold text-gold mb-2">134+</div>
                   <div className="text-silver">Projects Completed</div>
                 </div>
                 <div className="text-center">
@@ -168,6 +168,65 @@ const AboutPage = () => {
                 more than 20 major football and sporting events across Africa and beyond, partnering with
                 global clubs and federations to establish a trusted legacy of excellence.
               </p>
+            </div>
+
+            {/* Directors Section */}
+            <div className="text-center mb-8">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                Our <span className="text-gold">Leadership</span>
+              </h3>
+              <p className="text-xl text-silver">Meet the directors driving SAI Sports forward</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Director 1 */}
+              <div className="glass-card text-center" data-testid="director-1">
+                <div className="mb-6">
+                  <img
+                    src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/44dhtktz_4.png"
+                    alt="Youshen Naidoo"
+                    className="w-48 h-48 object-cover rounded-full mx-auto border-4 border-gold/30"
+                  />
+                </div>
+                <h4 className="text-2xl font-bold text-gold mb-2">Youshen Naidoo</h4>
+                <p className="text-lg text-silver mb-4">Director: Finance and Operations</p>
+                <div className="text-sm text-silver space-y-1">
+                  <p>
+                    <a href="mailto:yn@saisports.co.za" className="hover:text-gold transition-colors">
+                      yn@saisports.co.za
+                    </a>
+                  </p>
+                  <p>
+                    <a href="tel:+27827414722" className="hover:text-gold transition-colors">
+                      +27 82 741 4722
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Director 2 */}
+              <div className="glass-card text-center" data-testid="director-2">
+                <div className="mb-6">
+                  <img
+                    src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/foq0nybo_5.png"
+                    alt="Tichaona Mawoni"
+                    className="w-48 h-48 object-cover rounded-full mx-auto border-4 border-gold/30"
+                  />
+                </div>
+                <h4 className="text-2xl font-bold text-gold mb-2">Tichaona Mawoni</h4>
+                <p className="text-lg text-silver mb-4">Director: Sales and Marketing</p>
+                <div className="text-sm text-silver space-y-1">
+                  <p>
+                    <a href="mailto:tm@saisports.co.za" className="hover:text-gold transition-colors">
+                      tm@saisports.co.za
+                    </a>
+                  </p>
+                  <p>
+                    <a href="tel:+27656509338" className="hover:text-gold transition-colors">
+                      +27 65 650 9338
+                    </a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
