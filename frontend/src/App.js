@@ -5,7 +5,6 @@ import HomePage from '@/pages/HomePage';
 import AboutPage from '@/pages/AboutPage';
 import ServicesPage from '@/pages/ServicesPage';
 import SuccessPage from '@/pages/SuccessPage';
-import GalleryPage from '@/pages/GalleryPage';
 import ContactPage from '@/pages/ContactPage';
 import Layout from '@/components/Layout';
 import { Toaster } from '@/components/ui/sonner';
@@ -20,7 +19,6 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/success" element={<SuccessPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </Layout>

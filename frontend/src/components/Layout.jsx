@@ -11,7 +11,6 @@ const Layout = ({ children }) => {
     { name: 'About', path: '/about' },
     { name: 'Services', path: '/services' },
     { name: 'Success Stories', path: '/success' },
-    { name: 'Gallery', path: '/gallery' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -46,7 +45,7 @@ const Layout = ({ children }) => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/osi8hfrr_1.png" 
                 alt="SAI Sports" 
-                className="h-12 md:h-16 w-auto object-contain"
+                className="h-16 md:h-20 lg:h-24 w-auto object-contain"
               />
             </Link>
 
@@ -122,7 +121,7 @@ const Layout = ({ children }) => {
       </header>
 
       {/* Main Content */}
-      <main className="pt-24 md:pt-32">{children}</main>
+      <main className="pt-32 md:pt-36">{children}</main>
 
       {/* Footer */}
       <footer className="bg-black border-t border-gold/20 mt-20">
@@ -133,7 +132,7 @@ const Layout = ({ children }) => {
               <img 
                 src="https://customer-assets.emergentagent.com/job_sai-sports-mgmt/artifacts/osi8hfrr_1.png" 
                 alt="SAI Sports" 
-                className="h-12 w-auto object-contain mb-4"
+                className="h-16 w-auto object-contain mb-4"
               />
               <p className="text-silver text-sm mb-4">
                 Positioning Africa at the Heart of Global Sports Excellence
