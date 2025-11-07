@@ -1,0 +1,168 @@
+================================================================================
+SAI SPORTS DATABASE - ENTITY RELATIONSHIP DIAGRAM
+================================================================================
+
+Database: sai_sports
+Engine: MySQL/MariaDB
+Charset: utf8mb4_unicode_ci
+
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                         CONTACT_MESSAGES                            │
+├─────────────────────────────────────────────────────────────────────┤
+│  PK  id              VARCHAR(36)      NOT NULL                      │
+│      name            VARCHAR(255)     NOT NULL                      │
+│  IDX email           VARCHAR(255)     NOT NULL                      │
+│      phone           VARCHAR(50)      NULL                          │
+│      message         TEXT             NOT NULL                      │
+│  IDX timestamp       DATETIME         NOT NULL                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  Indexes:                                                           │
+│    - PRIMARY KEY (id)                                               │
+│    - INDEX idx_email (email)                                        │
+│    - INDEX idx_timestamp (timestamp)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│  Purpose: Stores contact form submissions from website              │
+│  Records: All customer inquiries and contact requests               │
+│  Retention: Recommended 2-5 years for business records              │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────┐
+│                         STATUS_CHECKS                               │
+├─────────────────────────────────────────────────────────────────────┤
+│  PK  id              VARCHAR(36)      NOT NULL                      │
+│  IDX client_name     VARCHAR(255)     NOT NULL                      │
+│  IDX timestamp       DATETIME         NOT NULL                      │
+├─────────────────────────────────────────────────────────────────────┤
+│  Indexes:                                                           │
+│    - PRIMARY KEY (id)                                               │
+│    - INDEX idx_client_name (client_name)                            │
+│    - INDEX idx_timestamp (timestamp)                                │
+├─────────────────────────────────────────────────────────────────────┤
+│  Purpose: System health monitoring and status tracking              │
+│  Records: API health checks and system status logs                  │
+│  Retention: Recommended 30-90 days for monitoring                   │
+└─────────────────────────────────────────────────────────────────────┘
+
+
+================================================================================
+RELATIONSHIPS
+================================================================================
+
+Currently, there are NO foreign key relationships between tables.
+Each table operates independently.
+
+Future Considerations:
+- User authentication table
+- Service requests table (linked to contact_messages)
+- Event registrations table
+- Athlete profiles table
+
+================================================================================
+DATA FLOW
+================================================================================
+
+Frontend (React)
+    │
+    ├──> POST /api/contact ──────┐
+    │                             │
+    │                             ▼
+    │                    ┌──────────────────┐
+    │                    │   FastAPI        │
+    │                    │   Backend        │
+    │                    └──────────────────┘
+    │                             │
+    │                             ▼
+    │                    ┌──────────────────┐
+    │                    │   SQLAlchemy     │
+    │                    │   ORM Layer      │
+    │                    └──────────────────┘
+    │                             │
+    │                             ▼
+    └──> GET /api/contact ──> contact_messages
+                                  │
+                                  │ MySQL Storage
+                                  ▼
+                            [MariaDB Server]
+
+================================================================================
+SECURITY LAYERS
+================================================================================
+
+1. Application Layer:
+   - Pydantic validation for all inputs
+   - Email validation using EmailStr
+   - Input sanitization via SQLAlchemy
+
+2. Database Layer:
+   - Prepared statements (automatic with SQLAlchemy)
+   - Connection pooling with pre-ping validation
+   - UTF-8 encoding to prevent injection
+
+3. Network Layer:
+   - CORS middleware configured
+   - Environment-based configuration
+   - No credentials in code
+
+================================================================================
+PERFORMANCE OPTIMIZATION
+================================================================================
+
+Indexes Created:
+├─ contact_messages.idx_email      → Fast email lookups
+├─ contact_messages.idx_timestamp  → Time-based queries
+├─ status_checks.idx_client_name   → Client filtering
+└─ status_checks.idx_timestamp     → Monitoring queries
+
+Connection Pooling:
+├─ pool_pre_ping: Validates connections before use
+├─ Auto-reconnect: Handles disconnections gracefully
+└─ Thread-safe: Supports concurrent requests
+
+Query Optimization:
+├─ Primary keys on all tables (UUID)
+├─ Selective column retrieval
+└─ Batch operations support
+
+================================================================================
+BACKUP STRATEGY
+================================================================================
+
+Recommended Schedule:
+├─ Daily: Full backup at 2 AM (low traffic)
+├─ Weekly: Schema-only export (documentation)
+└─ Monthly: Archive to external storage
+
+Backup Commands:
+$ mysqldump -u root -p sai_sports > daily_backup_$(date +%Y%m%d).sql
+$ mysqldump -u root -p --no-data sai_sports > schema_weekly.sql
+
+================================================================================
+MONITORING QUERIES
+================================================================================
+
+1. Check Table Sizes:
+   SELECT 
+       table_name, 
+       ROUND((data_length + index_length) / 1024 / 1024, 2) AS size_mb
+   FROM information_schema.tables
+   WHERE table_schema = 'sai_sports';
+
+2. Row Counts:
+   SELECT 
+       'contact_messages' AS table_name, COUNT(*) AS rows 
+   FROM contact_messages
+   UNION ALL
+   SELECT 
+       'status_checks', COUNT(*) 
+   FROM status_checks;
+
+3. Recent Activity:
+   SELECT 
+       COUNT(*) AS messages_today
+   FROM contact_messages
+   WHERE DATE(timestamp) = CURDATE();
+
+================================================================================
